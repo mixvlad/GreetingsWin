@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CarouselPage x:Name="MainPage" ItemsSource="{Binding GreetingsLists}" xmlns:local="clr-namespace:Greetings;assembly=Greetings" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:behaviors="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors" prism:ViewModelLocator.AutowireViewModel="True" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Greetings.Views.MainPage" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms">
+	<!--	<CarouselView ItemsSource="{Binding GreetingsLists}">
+		<CarouselView.ItemTemplate>
+			<DataTemplate>
+				<StackLayout>
+					<Label Text="123" VerticalOptions="Center" HorizontalOptions="Center" />
+					<Switch IsToggled="{Binding CanNavigateProp}" />
+					<Button Text="Navigate" Command="{Binding NavigateCommand}" />
+				</StackLayout>
+			</DataTemplate>
+		</CarouselView.ItemTemplate>
+	</CarouselView>-->
+	<CarouselPage.ItemTemplate>
+		<DataTemplate>
+			<ContentPage>
+				<ContentPage.Padding>
+					<OnPlatform x:TypeArguments="Thickness" iOS="0,40,0,0" Android="0,20,0,0" />
+				</ContentPage.Padding>
+				<StackLayout>
+					<Label Text="{Binding Type}" FontSize="Medium" HorizontalOptions="Center" />
+					<ListView ItemsSource="{Binding Greetings}" SelectedItem="{Binding SelectedGreeting}" HasUnevenRows="true" RowHeight="-1">
+						<behaviors:Interaction.Behaviors>
+							<behaviors:BehaviorCollection>
+								<behaviors:EventToCommand CommandNameContext="{behaviors:RelativeContext MainPage}" EventName="ItemTapped" CommandName="ShareGreetingCommand" CommandParameter="{Binding SelectedGreeting}" />
+							</behaviors:BehaviorCollection>
+						</behaviors:Interaction.Behaviors>
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<StackLayout Orientation="Horizontal" Padding="2,15">
+										<!--	 2									<Image HorizontalOptions="Start" Source="bulb.png" />
+										<Label Text="{Binding name}" TextColor="{Binding color}" HorizontalOptions="CenterAndExpand" FontSize="18" FontFamily="" />
+										<Label Text="On" TextColor="Blue" HorizontalOptions="End" IsVisible="{Binding isOn}" />-->
+										<Label Text="{Binding Text}" TextColor="White" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+									</StackLayout>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+					<!--					<BoxView Color="{Binding Color}" WidthRequest="200" HeightRequest="200" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />-->
+				</StackLayout>
+			</ContentPage>
+		</DataTemplate>
+	</CarouselPage.ItemTemplate>
+</CarouselPage>
